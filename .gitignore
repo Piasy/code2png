@@ -22,3 +22,11 @@ _testmain.go
 *.exe
 *.test
 *.prof
+
+code2png
+main
+routers/commentsRouter*.go
+lastupdate.tmp
+images/
+tmp/
+
