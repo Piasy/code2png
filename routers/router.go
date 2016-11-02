@@ -8,9 +8,9 @@
 package routers
 
 import (
-	"github.com/Piasy/code2png/controllers"
-
 	"github.com/astaxie/beego"
+
+	"github.com/Piasy/code2png/controllers"
 )
 
 func init() {
@@ -23,3 +23,4 @@ func init() {
 	)
 	beego.AddNamespace(ns)
 }
+

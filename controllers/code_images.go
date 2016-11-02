@@ -14,6 +14,13 @@ import (
 
 )
 
+var LANGS map[string]string = map[string]string {
+	"java"		: "java",
+	"python"	: "py",
+	"c++"		: "cpp",
+	"javascript"	: "js",
+}
+
 // Operations about object
 type CodeImagesController struct {
 	beego.Controller
@@ -27,8 +34,13 @@ type CodeImagesController struct {
 // @Failure 403 body is empty
 // @router / [post]
 func (this *CodeImagesController) Post() {
-	lang := this.GetString("lang")
+	lang := LANGS[this.GetString("lang")]
+	if len(lang) == 0 {
+		this.Ctx.ResponseWriter.WriteHeader(403)
+		return
+	}
 	code := this.GetString("code")
+	beego.Info(code)
 	ts := time.Now().Unix()
 	name := "tmp/code_" + strconv.FormatInt(ts, 10) + "." + lang
 	code = strings.Replace(code, "\\r", "\r", -1)
