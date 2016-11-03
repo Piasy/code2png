@@ -12359,20 +12359,7 @@ env.editSnippets = function() {
 };
 
 env.submitConvert = function() {
-  var code = env.editor.getValue();
-  //console.log(code.replace(/\n/, "\\n").replace(/\r/, "\\r"));
-  net.post("http://code2png.babits.top/v1/code_images/", 
-           "lang=java&code=" + code, 
-           function(resp) {
-             var image = JSON.parse(resp);
-             var xhr = new XMLHttpRequest();
-             xhr.open("GET", image.url, true);
-             xhr.responseType = 'blob';
-             xhr.onload = function(e) {
-               download(xhr.response, image.url.substring(image.url.lastIndexOf("/") + 1), "image/png");
-             };
-             xhr.send();
-           });
+  code2png("java", env.editor.getValue());
 };
 
 require("ace/ext/language_tools");
