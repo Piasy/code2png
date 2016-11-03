@@ -40,7 +40,6 @@ func (this *CodeImagesController) Post() {
 		return
 	}
 	code := this.GetString("code")
-	beego.Info(code)
 	ts := time.Now().Unix()
 	name := "tmp/code_" + strconv.FormatInt(ts, 10) + "." + lang
 	code = strings.Replace(code, "\\r", "\r", -1)
