@@ -44,8 +44,11 @@ func (this *CodeImagesController) Post() {
 	name := "tmp/code_" + strconv.FormatInt(ts, 10) + "." + lang
 	code = strings.Replace(code, "\\r", "\r", -1)
 	code = strings.Replace(code, "\\n", "\n", -1)
+	lineNum := len(strings.Split(code, "\n"))
+	width := "210"
+	height := strconv.Itoa(int(float32(lineNum) / 30 * 210))
 	ioutil.WriteFile(name, []byte(code), 0644)
-	cmd := exec.Command("./code2png.sh", name)
+	cmd := exec.Command("./code2png.sh", name, width, height)
 	cmd.Start()
 	cmd.Wait()
 	image := models.CodeImage{Url: fmt.Sprintf("http://code2png.babits.top/images/code_%d.%s.png", ts, lang)}
